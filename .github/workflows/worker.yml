@@ -1,0 +1,24 @@
+name: Run Worker
+
+on:
+  schedule:
+    - cron: '0 23 * * *'  # 毎朝8時JST（UTC 23時）
+  workflow_dispatch:        # 手動実行も可能
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.23'
+
+      - name: Build and Run Worker
+        working-directory: worker
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: |
+          go run ./cmd/main.go

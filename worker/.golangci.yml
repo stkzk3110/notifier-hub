@@ -1,0 +1,18 @@
+version: "2"
+
+linters:
+  enable:
+    - errcheck
+    - staticcheck
+    - ineffassign
+    - gosec
+  settings:
+    gosec:
+      excludes:
+        - G104  # エラー無視の検出（errcheckと重複するため除外）
+
+issues:
+  exclude-rules:
+    - path: _test\.go
+      linters:
+        - gosec
