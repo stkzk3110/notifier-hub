@@ -37,6 +37,7 @@ func main() {
 
 	// スクレイパー
 	rssScaper := scraper.NewRSS()
+	scrapeScaper := scraper.NewScrape()
 
 	for _, src := range sources {
 		var items []scraper.Item
@@ -45,6 +46,8 @@ func main() {
 		switch src.Type {
 		case "rss":
 			items, fetchErr = rssScaper.Fetch(ctx, src.URL, src.Keywords)
+		case "scrape":
+			items, fetchErr = scrapeScaper.Fetch(ctx, src.URL, src.Keywords)
 		default:
 			log.Printf("unsupported type %s for %s, skipping", src.Type, src.Name)
 			continue
