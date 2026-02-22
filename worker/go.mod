@@ -1,6 +1,6 @@
 module github.com/yourname/notify-hub/worker
 
-go 1.25.0
+go 1.25.7
 
 require (
 	github.com/PuerkitoBio/goquery v1.11.0 // indirect
